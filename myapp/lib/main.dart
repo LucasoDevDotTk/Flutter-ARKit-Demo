@@ -89,13 +89,12 @@ class _CameraPage extends State<CameraPage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(title: const Text('ARKit in Flutter')),
       body: ARKitSceneView(onARKitViewCreated: onARKitViewCreated));
 
   void onARKitViewCreated(ARKitController arkitController) {
     this.arkitController = arkitController;
     final node = ARKitNode(
-        geometry: ARKitSphere(radius: 0.1), position: Vector3(0, 0, -0.5));
+        geometry: ARKitSphere(radius: 0.1), position: Vector3(0, 0, -0.5)); //lage karakterer
     this.arkitController.add(node);
   }
 }
