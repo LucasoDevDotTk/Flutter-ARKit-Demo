@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:arkit_plugin/arkit_plugin.dart';
-import 'package:vector_math/vector_math_64.dart';
+import 'package:vector_math/vector_math_64.dart' as vector;
 
 void main() {
   runApp(MyApp());
@@ -91,12 +91,26 @@ class _CameraPage extends State<CameraPage> {
   Widget build(BuildContext context) => Scaffold(
       body: ARKitSceneView(onARKitViewCreated: onARKitViewCreated));
 
-  void onARKitViewCreated(ARKitController arkitController) {
-    this.arkitController = arkitController;
-    final node = ARKitNode(
-        geometry: ARKitSphere(radius: 0.1), position: Vector3(0, 0, -0.5)); //lage karakterer
-    this.arkitController.add(node);
-  }
+      void onARKitViewCreated(ARKitController arkitController) {
+      this.arkitController = arkitController;
+
+  final node = ARKitNode(
+    geometry: ARKitText(
+      text: "Test",
+      extrusionDepth: 1,
+      materials: [
+        ARKitMaterial(
+          diffuse: ARKitMaterialProperty.color(Colors.blue),
+        ),
+      ],
+    ),
+    position: vector.Vector3(-20, -10, -40),
+  );
+
+  node.scale.setValues(0.01, 0.01, 0.01);
+  arkitController.add(node);
+}
+
 }
 class ProfilePage extends StatelessWidget {
   @override
